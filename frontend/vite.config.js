@@ -2,17 +2,17 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   build: {
     outDir: 'dist',
-    rollupOptions: {
-      input: {
-        main: './index.html'
-      }
-    }
+    emptyOutDir: true,
+    sourcemap: false // Disable sourcemaps for production
   },
-  // This ensures correct paths in production
-  base: './',
+  // This is CRITICAL for Vercel deployment
+  base: '/',
+  publicDir: 'public',
+  server: {
+    host: true
+  }
 })
